@@ -5,6 +5,9 @@ public class Device {
 	private String mac;
 	private boolean connected;
 
+	public Device(){
+	}
+	
 	public Device(String name, String mac, boolean connected) {
 		this.name = name;
 		this.mac = mac;
