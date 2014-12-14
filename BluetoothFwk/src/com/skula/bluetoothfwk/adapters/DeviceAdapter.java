@@ -5,11 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.skula.bluetoothfwk.R;
 import com.skula.models.Device;
 
-public class DeviceAdapter  extends ArrayAdapter<Device> {
+public class DeviceAdapter extends ArrayAdapter<Device> {
 
 	Context context;
 	int layoutResourceId;
@@ -25,12 +26,21 @@ public class DeviceAdapter  extends ArrayAdapter<Device> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Device device = data[position];
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View rowView = inflater.inflate(R.layout.devicelayout, parent, false);
-		
-		//TextView shortcut = (TextView) rowView.findViewById(R.id.episode_shortcut);
-		//shortcut.setText(episode.getShortcut());	
 
+		TextView name = (TextView) rowView.findViewById(R.id.device_name);
+		name.setText(device.getName());
+		TextView mac = (TextView) rowView.findViewById(R.id.device_mac);
+		mac.setText(device.getMac());
+		TextView connected = (TextView) rowView
+				.findViewById(R.id.device_connected);
+		if (device.isConnected()) {
+			connected.setText("ON");
+		} else {
+			connected.setText("OFF");
+		}
 		return rowView;
 	}
 }
