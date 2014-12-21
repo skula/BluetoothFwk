@@ -27,12 +27,11 @@
             android:textSize="30px" />
     </LinearLayout>
 
-    <TextView
+    <ImageView
         android:id="@+id/device_connected"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginRight="25px"
-        android:gravity="right|center_vertical"
-        android:textSize="35px" />
+        android:gravity="right|center_vertical"/>
 
 </LinearLayout>

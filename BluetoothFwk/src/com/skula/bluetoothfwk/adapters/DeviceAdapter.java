@@ -1,22 +1,23 @@
 package com.skula.bluetoothfwk.adapters;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.skula.bluetoothfwk.R;
-import com.skula.models.Device;
 
-public class DeviceAdapter extends ArrayAdapter<Device> {
+public class DeviceAdapter extends ArrayAdapter<BluetoothDevice> {
 
 	Context context;
 	int layoutResourceId;
-	Device data[] = null;
+	BluetoothDevice data[] = null;
 
-	public DeviceAdapter(Context context, int layoutResourceId, Device[] data) {
+	public DeviceAdapter(Context context, int layoutResourceId, BluetoothDevice[] data) {
 		super(context, layoutResourceId, data);
 		this.layoutResourceId = layoutResourceId;
 		this.context = context;
@@ -25,7 +26,7 @@ public class DeviceAdapter extends ArrayAdapter<Device> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Device device = data[position];
+		BluetoothDevice device = data[position];
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View rowView = inflater.inflate(R.layout.devicelayout, parent, false);
@@ -33,13 +34,12 @@ public class DeviceAdapter extends ArrayAdapter<Device> {
 		TextView name = (TextView) rowView.findViewById(R.id.device_name);
 		name.setText(device.getName());
 		TextView mac = (TextView) rowView.findViewById(R.id.device_mac);
-		mac.setText(device.getMac());
-		TextView connected = (TextView) rowView
-				.findViewById(R.id.device_connected);
-		if (device.isConnected()) {
-			connected.setText("ON");
+		mac.setText(device.getAddress());
+		ImageView connected = (ImageView) rowView.findViewById(R.id.device_connected);
+		if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
+			connected.setImageResource(R.drawable.on);
 		} else {
-			connected.setText("OFF");
+			connected.setImageResource(R.drawable.off);
 		}
 		return rowView;
 	}
