@@ -35,12 +35,12 @@ public class DeviceAdapter extends ArrayAdapter<BluetoothDevice> {
 		name.setText(device.getName());
 		TextView mac = (TextView) rowView.findViewById(R.id.device_mac);
 		mac.setText(device.getAddress());
-		ImageView connected = (ImageView) rowView.findViewById(R.id.device_connected);
-		if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
+		//ImageView connected = (ImageView) rowView.findViewById(R.id.device_connected);
+		/*if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
 			connected.setImageResource(R.drawable.on);
 		} else {
 			connected.setImageResource(R.drawable.off);
-		}
+		}*/
 		return rowView;
 	}
 }
